@@ -35,6 +35,10 @@
                 100% {left:0px;}
       }
 
+      .wiggle {
+        display: none;
+      }
+
       .wiggle:hover {
               -webkit-animation: wiggle 0.5s infinite;
               -moz-animation: wiggle 0.5s infinite;
@@ -113,8 +117,7 @@ href="mailto:dave@understandingfonts.com">dave@understandingfonts.com</a></p>
     </div>
     </div>
 
-    <h2 class="wiggle">sexy<br /> bell-bottom jeans <br />and a <br />fuzzy <br
-/>cape? <br />I've awoken <br />in the age of <br />aquarius!</h2>
+    <h2 class="wiggle">sexy<br /> bell-bottom jeans <br />and a <br />fuzzy <br />cape? <br />I've awoken <br />in the age of <br />aquarius!</h2>
 
     </div> <!-- /container -->
 
@@ -134,6 +137,33 @@ href="mailto:dave@understandingfonts.com">dave@understandingfonts.com</a></p>
     <script src="assets/js/bootstrap-collapse.js"></script>
     <script src="assets/js/bootstrap-carousel.js"></script>
     <script src="assets/js/bootstrap-typeahead.js"></script>
+    <script src="assets/js/jquery.fittext.js"></script>
 
+    <script>
+      $.fn.random = function() {
+          var randomIndex = Math.floor(Math.random() * this.length);  
+          return jQuery(this[randomIndex]);
+      };
+      $(function(){
+        var wiggleText = $('.wiggle')
+
+        var apikey = 'AIzaSyBKEIQeLtpWJgZ8rqSPGoy5NgzqOoqlJIY';
+        var webfonts_url = 'https://www.googleapis.com/webfonts/v1/webfonts';
+        $.ajax({
+          url: webfonts_url,
+          data: {key: apikey},
+          success: function(data, textStatus, jqXHR) {
+            var font = $(data.items).random();
+            var font_url = 'http://fonts.googleapis.com/css?subset=latin&family=' + font[0].family;
+            var link = $('<link>').attr('href', font_url).attr('rel', 'stylesheet').attr('type', 'text/css');
+            $('head').append(link);
+
+            wiggleText.fitText();
+            wiggleText.css('font-family', font[0].family).fadeIn();
+          },
+          dataType: 'json'
+        });
+      });
+    </script>
   </body>
 </html>
