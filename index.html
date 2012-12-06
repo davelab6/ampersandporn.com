@@ -14,6 +14,33 @@
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
       }
+
+      /* safari and chrome */
+      @-webkit-keyframes wiggle {
+                0% {left:0;}
+                50% {left:10px;}
+                100% {left:0px;}
+      }
+
+      /* firefox */
+      @-moz-keyframes wiggle {
+                0% {left:0;}
+                50% {left:10px;}
+                100% {left:0px;}}
+
+      /* anyone brave enough to implement the ideal method */
+      @keyframes wiggle {
+                0% {left:0;}
+                50% {left:10px;}
+                100% {left:0px;}
+      }
+
+      .wiggle:hover {
+              -webkit-animation: wiggle 0.5s infinite;
+              -moz-animation: wiggle 0.5s infinite;
+              animation: wiggle 0.5s infinite;
+          position:relative;
+      }
     </style>
     <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
 
@@ -86,7 +113,7 @@ href="mailto:dave@understandingfonts.com">dave@understandingfonts.com</a></p>
     </div>
     </div>
 
-    <h2>sexy<br /> bell-bottom jeans <br />and a <br />fuzzy <br
+    <h2 class="wiggle">sexy<br /> bell-bottom jeans <br />and a <br />fuzzy <br
 />cape? <br />I've awoken <br />in the age of <br />aquarius!</h2>
 
     </div> <!-- /container -->
