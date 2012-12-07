@@ -140,26 +140,36 @@ href="mailto:dave@understandingfonts.com">dave@understandingfonts.com</a></p>
     <script src="assets/js/jquery.fittext.js"></script>
 
     <script>
-      $.fn.random = function() {
-          var randomIndex = Math.floor(Math.random() * this.length);  
-          return jQuery(this[randomIndex]);
-      };
-      $(function(){
-        var wiggleText = $('.wiggle')
+      var GWF_APIKEY = 'AIzaSyBKEIQeLtpWJgZ8rqSPGoy5NgzqOoqlJIY';
+      var wiggleText = $('.wiggle');
 
-        var apikey = 'AIzaSyBKEIQeLtpWJgZ8rqSPGoy5NgzqOoqlJIY';
+      $.fn.random = function() {
+          var randomIndex = Math.floor(Math.random() * this.length);
+          return this[randomIndex];
+      };
+
+      function setupWiggleText(font) {
+          var font_url = 'http://fonts.googleapis.com/css?subset=latin&family=' + font.family;
+          var variant = $(font.variants).random();
+
+          var link = $('<link>').attr('href', font_url).attr('rel', 'stylesheet').attr('type', 'text/css');
+          $('head').append(link);
+
+          wiggleText.fitText();
+          wiggleText.css('font-family', font.family)
+          if (variant) {
+            wiggleText.css('font-style', variant);
+          }
+          wiggleText.fadeIn(900);
+      }
+
+      $(function(){
         var webfonts_url = 'https://www.googleapis.com/webfonts/v1/webfonts';
         $.ajax({
           url: webfonts_url,
-          data: {key: apikey},
+          data: {key: GWF_APIKEY},
           success: function(data, textStatus, jqXHR) {
-            var font = $(data.items).random();
-            var font_url = 'http://fonts.googleapis.com/css?subset=latin&family=' + font[0].family;
-            var link = $('<link>').attr('href', font_url).attr('rel', 'stylesheet').attr('type', 'text/css');
-            $('head').append(link);
-
-            wiggleText.fitText();
-            wiggleText.css('font-family', font[0].family).fadeIn();
+            setupWiggleText($(data.items).random());
           },
           dataType: 'json'
         });
