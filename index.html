@@ -35,7 +35,7 @@
       }
 
       .wiggle {
-      /* display: none; */
+      display: none;
       font-size:500px;
       position: relative;
       top:200px;
@@ -154,12 +154,13 @@
           var link = $('<link>').attr('href', font_url).attr('rel', 'stylesheet').attr('type', 'text/css');
           $('head').append(link);
 
-          wiggleText.fitText();
           wiggleText.css('font-family', font.family)
           if (variant) {
             wiggleText.css('font-style', variant);
           }
-          wiggleText.fadeIn(900);
+          wiggleText.fadeIn(700);
+
+          wiggleText.fitText(0.27);
       }
 
       $(function(){
