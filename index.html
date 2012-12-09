@@ -148,7 +148,7 @@
       };
 
       function setupWiggleText(font) {
-          var font_url = 'http://fonts.googleapis.com/css?subset=latin&family=' + font.family;
+          var font_url = 'http://fonts.googleapis.com/css?family=' + font.family + '&subset=latin';
           var variant = $(font.variants).random();
 
           var link = $('<link>').attr('href', font_url).attr('rel', 'stylesheet').attr('type', 'text/css');
@@ -171,7 +171,8 @@
           success: function(data, textStatus, jqXHR) {
             setupWiggleText($(data.items).random());
           },
-          dataType: 'json'
+          dataType: 'jsonp',
+          crossDomain: true
         });
       });
     </script>
