@@ -179,8 +179,6 @@
         if (variant) {
           wiggleText.css('font-style', variant);
         }
-
-        wiggleText.fitText(0.4);
         
         WebFont.load({
           google: { families: [ font.family ] },
@@ -203,6 +201,8 @@
           dataType: 'jsonp',
           crossDomain: true
         });
+
+        wiggleText.fitText(0.4);
 
         var _currentStyle = wiggleText.attr('style');
         $('#refresh-font').on('click', function(){
