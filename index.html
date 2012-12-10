@@ -179,7 +179,6 @@
         if (variant) {
           wiggleText.css('font-style', variant);
         }
-        wiggleText.fitText(0.4);
         
         WebFont.load({
           google: { families: [ font.family ] },
@@ -202,9 +201,11 @@
           crossDomain: true
         });
 
+        wiggleText.fitText(0.2);
+
+        var _currentStyle = wiggleText.attr('style');
         $('#refresh-font').on('click', function(){
           wiggleText.fadeOut(400, function() {
-            wiggleText.fitText();
             setupWiggleText(_fontCache.random());
           });
         })
