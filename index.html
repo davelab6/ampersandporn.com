@@ -7,6 +7,18 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <script>
+    (function() {
+      var wf = document.createElement('script');
+      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+          '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+      wf.type = 'text/javascript';
+      wf.async = 'true';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(wf, s);
+    })()
+    </script>
+
     <!-- Le styles -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <style>
@@ -76,7 +88,7 @@
           <a class="brand" href="#">Ampersand Porn</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="javascript:location.reload(true)">Refresh</a></li>
+              <li class="active"><a href="javascript:;" id="refresh-font">Refresh</a></li>
               <li><a href="http://typefaceporn.com">Typefaces</a></li>
               <li><a href="http://ampersandporn.com">&amp;&amp;&amp;</a></li>
               <li><a href="http://letterxxxlive.com">XXX</a> </li>
@@ -144,25 +156,37 @@
       var GWF_APIKEY = 'AIzaSyBKEIQeLtpWJgZ8rqSPGoy5NgzqOoqlJIY';
       var wiggleText = $('.wiggle');
 
+      var _currentFont;
+      var _fontCache;
+
       $.fn.random = function() {
           var randomIndex = Math.floor(Math.random() * this.length);
           return this[randomIndex];
       };
 
       function setupWiggleText(font) {
-          var font_url = 'http://fonts.googleapis.com/css?family=' + font.family + '&subset=latin';
-          var variant = $(font.variants).random();
+        var font_url = 'http://fonts.googleapis.com/css?family=' + font.family + '&subset=latin';
+        var variant = $(font.variants).random();
 
-          var link = $('<link>').attr('href', font_url).attr('rel', 'stylesheet').attr('type', 'text/css');
-          $('head').append(link);
+        if (_currentFont) {
+          _currentFont.remove();
+        }
 
-          wiggleText.css('font-family', font.family)
-          if (variant) {
-            wiggleText.css('font-style', variant);
+        _currentFont = $('<link>').attr('href', font_url).attr('rel', 'stylesheet').attr('type', 'text/css');
+        $('head').append(_currentFont);
+
+        wiggleText.css('font-family', font.family)
+        if (variant) {
+          wiggleText.css('font-style', variant);
+        }
+        wiggleText.fitText(0.4);
+        
+        WebFont.load({
+          google: { families: [ font.family ] },
+          active: function() {
+            wiggleText.fadeIn(700);
           }
-          wiggleText.fadeIn(700);
-
-          wiggleText.fitText(0.27);
+        });
       }
 
       $(function(){
@@ -171,11 +195,19 @@
           url: webfonts_url,
           data: {key: GWF_APIKEY},
           success: function(data, textStatus, jqXHR) {
-            setupWiggleText($(data.items).random());
+            _fontCache = $(data.items);
+            setupWiggleText(_fontCache.random());
           },
           dataType: 'jsonp',
           crossDomain: true
         });
+
+        $('#refresh-font').on('click', function(){
+          wiggleText.fadeOut(400, function() {
+            wiggleText.fitText();
+            setupWiggleText(_fontCache.random());
+          });
+        })
       });
     </script>
   </body>
