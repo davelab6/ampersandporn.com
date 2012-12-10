@@ -184,6 +184,7 @@
           google: { families: [ font.family ] },
           active: function() {
             wiggleText.fadeIn(700);
+            $(window).trigger('resize');
           }
         });
       }
@@ -201,7 +202,7 @@
           crossDomain: true
         });
 
-        wiggleText.fitText(0.2);
+        wiggleText.fitText(0.4);
 
         var _currentStyle = wiggleText.attr('style');
         $('#refresh-font').on('click', function(){
