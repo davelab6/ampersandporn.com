@@ -47,10 +47,10 @@
       }
 
       .wiggle {
-      display: none;
-      font-size:500px;
-      position: relative;
-      top:200px;
+        display: none;
+        font-size:500px;
+        position: relative;
+        top:200px;
       }
 
       .wiggle:hover {
@@ -130,7 +130,9 @@
 	    </div>
 	    </div>
 
-    <h2 class="wiggle">&amp;</h2>
+      <h2 class="wiggle">&amp;</h2>
+
+      <p id="font-name"></p>
 
     </div> <!-- /container -->
 
@@ -154,18 +156,30 @@
 
     <script>
       var GWF_APIKEY = 'AIzaSyBKEIQeLtpWJgZ8rqSPGoy5NgzqOoqlJIY';
-      var wiggleText = $('.wiggle');
+      var wiggleText = $('h2.wiggle');
+      wiggleText.fitText(0.273);
 
       var _currentFont;
       var _fontCache;
+
+      var _DOM_fontName = $('#font-name');
+      var _DOM_HrefFontName = $('<a>').attr('target', '_blank');
 
       $.fn.random = function() {
           var randomIndex = Math.floor(Math.random() * this.length);
           return this[randomIndex];
       };
 
+      function refreshSpeciment(fontFamily) {
+        _DOM_HrefFontName.attr('href', 'http://www.google.com/webfonts/specimen/'+fontFamily);
+        _DOM_HrefFontName.html(fontFamily);
+
+        var tmp = $(_DOM_HrefFontName.wrap('<div></div>').parent());
+        _DOM_fontName.html(tmp.html());
+      }
+
       function setupWiggleText(font) {
-        var font_url = 'http://fonts.googleapis.com/css?family=' + font.family + '&subset=latin';
+        var font_url = 'http://fonts.googleapis.com/css?family=' + font.family + '&text=%26';
         var variant = $(font.variants).random();
 
         if (_currentFont) {
@@ -185,6 +199,7 @@
           active: function() {
             wiggleText.fadeIn(700);
             $(window).trigger('resize');
+            refreshSpeciment(font.family);
           }
         });
       }
@@ -201,8 +216,6 @@
           dataType: 'jsonp',
           crossDomain: true
         });
-
-        wiggleText.fitText(0.4);
 
         var _currentStyle = wiggleText.attr('style');
         $('#refresh-font').on('click', function(){
