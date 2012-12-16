@@ -131,7 +131,7 @@
 	    </div>
 	    </div>
 
-      <h2 class="wiggle"></h2>
+      <h2 class="wiggle">&amp;</h2>
       
       <p id="font-name" class="fontname">
         <a href="javascript:;"></a>
@@ -173,9 +173,8 @@
 
       var GWF_APIKEY = 'AIzaSyBKEIQeLtpWJgZ8rqSPGoy5NgzqOoqlJIY';
       var wiggleText = $('h2.wiggle');
-      var pornText = '&';
 
-      var wiggleLetters = getWiggleLetters(pornText);
+      var wiggleLetters = getWiggleLetters(wiggleText.text());
       wiggleText.fitText(0.4);
 
       var _currentFont;
@@ -205,8 +204,8 @@
           _currentFont.remove();
         }
 
-        _currentFont = $('<link>').attr('href', font_url).attr('rel', 'stylesheet').attr('type', 'text/css');
-        $('head').append(_currentFont);
+        // _currentFont = $('<link>').attr('href', font_url).attr('rel', 'stylesheet').attr('type', 'text/css');
+        // $('head').append(_currentFont);
 
         wiggleText.css('font-family', font.family)
         if (variant) {
@@ -216,7 +215,6 @@
         WebFont.load({
           google: { families: [ font.family ] },
           active: function() {
-            wiggleText.html(pornText);
             wiggleText.fadeIn(700, function() { _DOM_fontName.show(); });
             $(window).trigger('resize');
             refreshSpeciment(font.family);
@@ -239,9 +237,9 @@
 
         var _currentStyle = wiggleText.attr('style');
         $('#refresh-font').on('click', function(){
-          _DOM_fontName.hide();
           wiggleText.fadeOut(400, function() {
             setupWiggleText(_fontCache.random());
+            _DOM_fontName.hide();
           });
         })
       });
