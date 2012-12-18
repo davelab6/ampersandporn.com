@@ -131,7 +131,9 @@
 	    </div>
 	    </div>
 
-      <h2 class="wiggle">&amp;</h2>
+      <div class="wiggle">
+        <div>&amp;</div>
+      </div>
       
       <p id="font-name" class="fontname">
         <a href="javascript:;"></a>
@@ -155,7 +157,7 @@
     <script src="assets/js/bootstrap-collapse.js"></script>
     <script src="assets/js/bootstrap-carousel.js"></script>
     <script src="assets/js/bootstrap-typeahead.js"></script>
-    <script src="assets/js/jquery.fittext.js"></script>
+    <script src="assets/js/bigtext.js"></script>
 
     <script>
 
@@ -172,10 +174,10 @@
       }
 
       var GWF_APIKEY = 'AIzaSyBKEIQeLtpWJgZ8rqSPGoy5NgzqOoqlJIY';
-      var wiggleText = $('h2.wiggle');
+      var wiggleText = $('.wiggle');
 
       var wiggleLetters = getWiggleLetters(wiggleText.text());
-      wiggleText.fitText(0.4);
+      wiggleText.bigtext();
 
       var _currentFont;
       var _fontCache;
