@@ -96,7 +96,9 @@ function refreshWiggles(wiggles) {
 
 
 $(function(){
-  $('.ampersand-modal .wiggle').bigtext();
+  $('.ampersand-modal .wiggle').bigtext({
+    maxfontsize: 400
+  });
 
   var wiggles = $('.wiggles');
   $.ajax({
