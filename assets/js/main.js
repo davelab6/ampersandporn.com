@@ -49,7 +49,7 @@ Wiggle.prototype = {
 
       $('#ampersand_modal').modal();
 
-      mainWindow.trigger('resize');
+      $('#ampersand_modal .wiggle').trigger('resize');
     });
   }
 
@@ -65,7 +65,7 @@ function refreshWiggles(wiggles) {
 
   wiggles.html('');
 
-  var fonts = _fontCache.randomize().slice(0, 3);
+  var fonts = _fontCache.randomize().slice(0, 13);
 
   families = fonts.map(function(index, item) {
     return item.family;
