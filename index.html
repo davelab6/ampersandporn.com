@@ -29,9 +29,9 @@
         margin-top: 128px;
       }
 
-      .ampersand-modal {
-        width: 400px;
-        height: 400px;
+      .ampersand-modal .modal-body {
+        height: 472px;
+        width: 100%;
       }
 
       .short-wiggle {
@@ -70,6 +70,9 @@
                 0% {left:0;}
                 50% {left:10px;}
                 100% {left:0px;}
+      }
+
+      .wiggle {
       }
 
       .wiggle:hover {
@@ -127,7 +130,9 @@
         </div>
 
         <div class="modal-body">
-          <div class="wiggle">&amp;</div>
+          <div class="wiggle">
+            <div>&amp;</div>
+          </div>
         </div>
       </div>
 
@@ -182,6 +187,6 @@
     <script src="assets/js/bootstrap-carousel.js"></script>
     <script src="assets/js/bootstrap-typeahead.js"></script>
     <script src="assets/js/bigtext.js"></script>
-    <script src="assets/js/main.js?v6"></script>
+    <script src="assets/js/main.js?v7"></script>
   </body>
 </html>

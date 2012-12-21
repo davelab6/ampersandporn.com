@@ -42,17 +42,17 @@ Wiggle.prototype = {
     mainWindow.trigger('resize');
 
     this.wiggleText.on('click', function() {
-      $('#ampersand_modal modal_body').css('font-family', font.family);
-      $('#ampersand_modal modal_body').bigtext();
+      $('#ampersand_modal .wiggle').css('font-family', font.family);
 
       var link = $('<a>').attr('href', 'http://www.google.com/webfonts/specimen/'+font.family);
       $('#ampersand_modal #fontFamily').html(link.attr('target', '_blank').text(font.family));
-      mainWindow.trigger('resize');
 
       $('#ampersand_modal').modal();
+
+      mainWindow.trigger('resize');
     });
   }
-  
+
 };
 
 
@@ -96,6 +96,8 @@ function refreshWiggles(wiggles) {
 
 
 $(function(){
+  $('.ampersand-modal .wiggle').bigtext();
+
   var wiggles = $('.wiggles');
   $.ajax({
     url: GWF_APIURL,
