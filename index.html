@@ -25,6 +25,29 @@
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
       }
 
+      .wiggles {
+        margin-top: 128px;
+      }
+
+      .ampersand-modal {
+        width: 400px;
+        height: 400px;
+      }
+
+      .short-wiggle {
+        margin: 2.5px;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        position: relative;
+        bottom-bottom: dashed 1px #808080;
+      }
+
+      .short-wiggle > div {
+        position: absolute;
+        bottom: 0;
+      }
+
       .fontname {
         text-align: right;
       }
@@ -47,12 +70,6 @@
                 0% {left:0;}
                 50% {left:10px;}
                 100% {left:0px;}
-      }
-
-      .wiggle {
-        display: none;
-        position: relative;
-        top:200px;
       }
 
       .wiggle:hover {
@@ -103,6 +120,17 @@
 
     <div class="container">
 
+      <div id="ampersand_modal" class="ampersand-modal hide modal">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="fontFamily"></h3>
+        </div>
+
+        <div class="modal-body">
+          <div class="wiggle">&amp;</div>
+        </div>
+      </div>
+
 	    <div id="about" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	    <div class="modal-header">
 	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -131,13 +159,9 @@
 	    </div>
 	    </div>
 
-      <div class="wiggle">
-        <div>&amp;</div>
+      <div class="wiggles">
+
       </div>
-      
-      <p id="font-name" class="fontname">
-        <a href="javascript:;"></a>
-      </p>
       
     </div> <!-- /container -->
 
@@ -158,6 +182,6 @@
     <script src="assets/js/bootstrap-carousel.js"></script>
     <script src="assets/js/bootstrap-typeahead.js"></script>
     <script src="assets/js/bigtext.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/main.js?v6"></script>
   </body>
 </html>

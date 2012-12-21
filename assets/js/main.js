@@ -1,7 +1,9 @@
+var mainWindow = $(window);
+
 function getLetters(string) {
   var letters = [];
   var str = string.replace(/\s/g, '');
-  for(x = 0, length = str.length; x < length; x++) {
+  for (x = 0, length = str.length; x < length; x++) {
     var l = str.charAt(x);
     if (letters.indexOf(l) < 0) {
       letters.push(l);
@@ -15,6 +17,11 @@ $.fn.random = function() {
     return this[randomIndex];
 };
 
+
+$.fn.randomize = function() {
+  return this.sort(function() { return 0.5 - Math.random();});
+};
+
 function Wiggle(wiggleText) {
   this.wiggleText = wiggleText;
 
@@ -24,23 +31,6 @@ function Wiggle(wiggleText) {
 
 Wiggle.prototype = {
 
-  refreshSpeciment: function (fontFamily) {
-    this._DOM_HrefFontName.attr('href', 'http://www.google.com/webfonts/specimen/'+fontFamily);
-    this._DOM_HrefFontName.html(fontFamily);
-
-    var tmp = $(this._DOM_HrefFontName.wrap('<div></div>').parent());
-    this._DOM_fontName.html(tmp.html());
-  },
-
-  refreshWiggle: function (timeout, font) {
-    this._DOM_fontName.fadeOut(400);
-
-    var $this = this;
-    this.wiggleText.fadeOut(400, function() {
-      $this.setWiggle(font);
-    });
-  },
-
   setWiggle: function (font) {
     var variant = $(font.variants).random();
 
@@ -48,45 +38,75 @@ Wiggle.prototype = {
     if (variant) {
       this.wiggleText.css('font-style', variant);
     }
-    
-    var $this = this;
-    WebFont.load({
-      google: { families: [ font.family ] },
-      active: function() {
-        $this._DOM_fontName.fadeIn(700);
-        $this.wiggleText.fadeIn(700);
-        $(window).trigger('resize');
-        $this.refreshSpeciment(font.family);
-      }
+    this.wiggleText.fadeIn(400);
+    mainWindow.trigger('resize');
+
+    this.wiggleText.on('click', function() {
+      $('#ampersand_modal modal_body').css('font-family', font.family);
+      $('#ampersand_modal modal_body').bigtext();
+
+      var link = $('<a>').attr('href', 'http://www.google.com/webfonts/specimen/'+font.family);
+      $('#ampersand_modal #fontFamily').html(link.attr('target', '_blank').text(font.family));
+      mainWindow.trigger('resize');
+
+      $('#ampersand_modal').modal();
     });
   }
+  
 };
 
 
 var GWF_APIKEY = 'AIzaSyBKEIQeLtpWJgZ8rqSPGoy5NgzqOoqlJIY';
+var GWF_APIURL = 'https://www.googleapis.com/webfonts/v1/webfonts';
+var _fontCache;
+
+
+function refreshWiggles(wiggles) {
+
+  wiggles.html('');
+
+  var fonts = _fontCache.randomize().slice(0, 3);
+
+  families = fonts.map(function(index, item) {
+    return item.family;
+  });
+
+  WebFont.load({
+    google: { families: families },
+    fontinactive: function (fontFamily, fontDescription) {
+      var wiggle = $('<div>')
+        .addClass('pull-left short-wiggle')
+        .append($('<div>').text('x'));
+      wiggle.bigtext();
+      wiggles.append(wiggle);
+    },
+    fontactive: function(fontFamily, fontDescription) {
+      var wiggle = $('<div>')
+        .addClass('pull-left short-wiggle')
+        .append($('<div>').text('&'));
+
+      wiggle.bigtext();
+      wiggles.append(wiggle);
+
+      var w = new Wiggle(wiggle);
+      w.setWiggle({family: fontFamily});
+    }
+  });
+}
 
 
 $(function(){
-  var webfonts_url = 'https://www.googleapis.com/webfonts/v1/webfonts';
-
-  var wiggleText = $('.wiggle');
-  wiggleText.bigtext();
-
-  var wiggle = new Wiggle(wiggleText);
-
-  var _fontCache;
+  var wiggles = $('.wiggles');
   $.ajax({
-    url: webfonts_url,
+    url: GWF_APIURL,
     data: {key: GWF_APIKEY},
     success: function(data, textStatus, jqXHR) {
       _fontCache = $(data.items);
-      wiggle.setWiggle(_fontCache.random());
+      refreshWiggles(wiggles);
     },
     dataType: 'jsonp',
     crossDomain: true
   });
 
-  $('#refresh-font').on('click', function(){
-    wiggle.refreshWiggle(400, _fontCache.random());
-  });
+  $('#refresh-font').on('click', function() { refreshWiggles(wiggles); });
 });
