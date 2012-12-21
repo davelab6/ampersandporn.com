@@ -25,6 +25,29 @@
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
       }
 
+      .wiggles {
+        margin-top: 128px;
+      }
+
+      .ampersand-modal {
+        width: 400px;
+        height: 400px;
+      }
+
+      .short-wiggle {
+        margin: 2.5px;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        position: relative;
+        bottom-bottom: dashed 1px #808080;
+      }
+
+      .short-wiggle > div {
+        position: absolute;
+        bottom: 0;
+      }
+
       .fontname {
         text-align: right;
       }
@@ -47,12 +70,6 @@
                 0% {left:0;}
                 50% {left:10px;}
                 100% {left:0px;}
-      }
-
-      .wiggle {
-        display: none;
-        position: relative;
-        top:200px;
       }
 
       .wiggle:hover {
@@ -103,6 +120,17 @@
 
     <div class="container">
 
+      <div id="ampersand_modal" class="ampersand-modal hide modal">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="fontFamily"></h3>
+        </div>
+
+        <div class="modal-body">
+          <div class="wiggle">&amp;</div>
+        </div>
+      </div>
+
 	    <div id="about" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	    <div class="modal-header">
 	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -131,13 +159,9 @@
 	    </div>
 	    </div>
 
-      <div class="wiggle">
-        <div>&amp;</div>
+      <div class="wiggles">
+
       </div>
-      
-      <p id="font-name" class="fontname">
-        <a href="javascript:;"></a>
-      </p>
       
     </div> <!-- /container -->
 
@@ -158,94 +182,6 @@
     <script src="assets/js/bootstrap-carousel.js"></script>
     <script src="assets/js/bootstrap-typeahead.js"></script>
     <script src="assets/js/bigtext.js"></script>
-
-    <script>
-
-      function getWiggleLetters(str) {
-        var letters = [];
-        var str = str.replace(/\s/g, '');
-        for(x = 0, length = str.length; x < length; x++) {
-          var l = str.charAt(x);
-          if (letters.indexOf(l) < 0) {
-            letters.push(l);
-          }
-        }
-        return escape(letters.join(''));
-      }
-
-      var GWF_APIKEY = 'AIzaSyBKEIQeLtpWJgZ8rqSPGoy5NgzqOoqlJIY';
-      var wiggleText = $('.wiggle');
-
-      var wiggleLetters = getWiggleLetters(wiggleText.text());
-      wiggleText.bigtext();
-
-      var _currentFont;
-      var _fontCache;
-
-      var _DOM_fontName = $('#font-name');
-      var _DOM_HrefFontName = $('<a>').attr('target', '_blank');
-
-      $.fn.random = function() {
-          var randomIndex = Math.floor(Math.random() * this.length);
-          return this[randomIndex];
-      };
-
-      function refreshSpeciment(fontFamily) {
-        _DOM_HrefFontName.attr('href', 'http://www.google.com/webfonts/specimen/'+fontFamily);
-        _DOM_HrefFontName.html(fontFamily);
-
-        var tmp = $(_DOM_HrefFontName.wrap('<div></div>').parent());
-        _DOM_fontName.html(tmp.html());
-      }
-
-      function setupWiggleText(font) {
-        var font_url = 'http://fonts.googleapis.com/css?family=' + font.family + '&text=' + wiggleLetters;
-        var variant = $(font.variants).random();
-
-        if (_currentFont) {
-          _currentFont.remove();
-        }
-
-        // _currentFont = $('<link>').attr('href', font_url).attr('rel', 'stylesheet').attr('type', 'text/css');
-        // $('head').append(_currentFont);
-
-        wiggleText.css('font-family', font.family)
-        if (variant) {
-          wiggleText.css('font-style', variant);
-        }
-        
-        WebFont.load({
-          google: { families: [ font.family ] },
-          active: function() {
-            _DOM_fontName.fadeIn(700);
-            wiggleText.fadeIn(700);
-            $(window).trigger('resize');
-            refreshSpeciment(font.family);
-          }
-        });
-      }
-
-      $(function(){
-        var webfonts_url = 'https://www.googleapis.com/webfonts/v1/webfonts';
-        $.ajax({
-          url: webfonts_url,
-          data: {key: GWF_APIKEY},
-          success: function(data, textStatus, jqXHR) {
-            _fontCache = $(data.items);
-            setupWiggleText(_fontCache.random());
-          },
-          dataType: 'jsonp',
-          crossDomain: true
-        });
-
-        var _currentStyle = wiggleText.attr('style');
-        $('#refresh-font').on('click', function(){
-          _DOM_fontName.fadeOut(400);
-          wiggleText.fadeOut(400, function() {
-            setupWiggleText(_fontCache.random());
-          });
-        })
-      });
-    </script>
+    <script src="assets/js/main.js?v6"></script>
   </body>
 </html>
