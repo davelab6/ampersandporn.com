@@ -39,7 +39,7 @@ Wiggle.prototype = {
       this.wiggleText.css('font-style', variant);
     }
     this.wiggleText.fadeIn(400);
-    mainWindow.trigger('resize');
+    this.wiggleText.trigger('resize');
 
     this.wiggleText.on('click', function() {
       $('#ampersand_modal .wiggle').css('font-family', font.family);
@@ -76,7 +76,7 @@ function refreshWiggles(wiggles) {
     fontinactive: function (fontFamily, fontDescription) {
       var wiggle = $('<div>')
         .addClass('pull-left short-wiggle')
-        .append($('<div>').text('x'));
+        .append($('<div>').hide());
       wiggle.bigtext();
       wiggles.append(wiggle);
     },
