@@ -65,14 +65,14 @@ function refreshWiggles(wiggles) {
 
   wiggles.html('');
 
-  var fonts = _fontCache.randomize().slice(0, 13);
+  var fonts = _fontCache.randomize().slice(0, 100);
 
   families = fonts.map(function(index, item) {
     return item.family;
   });
 
   WebFont.load({
-    google: { families: families },
+    google: { families: families, text: escape("&") },
     fontinactive: function (fontFamily, fontDescription) {
       var wiggle = $('<div>')
         .addClass('pull-left short-wiggle')
