@@ -73,13 +73,6 @@ function refreshWiggles(wiggles) {
 
   WebFont.load({
     google: { families: families, text: "&" },
-    fontinactive: function (fontFamily, fontDescription) {
-      var wiggle = $('<div>')
-        .addClass('pull-left short-wiggle')
-        .append($('<div>').hide());
-      wiggle.bigtext();
-      wiggles.append(wiggle);
-    },
     fontactive: function(fontFamily, fontDescription) {
       var wiggle = $('<div>')
         .addClass('pull-left short-wiggle')
