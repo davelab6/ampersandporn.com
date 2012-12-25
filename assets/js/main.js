@@ -76,7 +76,7 @@ function refreshWiggles(wiggles) {
     fontinactive: function (fontFamily, fontDescription) {
       var wiggle = $('<div>')
         .addClass('pull-left short-wiggle')
-        .append($('<div>').text('x'));
+        .append($('<div>').hide());
       wiggle.bigtext();
       wiggles.append(wiggle);
     },
