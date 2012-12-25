@@ -72,7 +72,7 @@ function refreshWiggles(wiggles) {
   });
 
   WebFont.load({
-    google: { families: families, text: escape("&") },
+    google: { families: families, text: "&" },
     fontinactive: function (fontFamily, fontDescription) {
       var wiggle = $('<div>')
         .addClass('pull-left short-wiggle')
