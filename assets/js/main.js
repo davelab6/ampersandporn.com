@@ -49,6 +49,8 @@ Wiggle.prototype = {
       var link = $('<a>').attr('href', 'http://www.google.com/webfonts/specimen/'+font.family);
       linkName.html(link.attr('target', '_blank').text(font.family));
       modal.modal();
+
+      modal.trigger('resize');
     });
   }
 
