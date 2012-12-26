@@ -9,7 +9,7 @@ function getLetters(string) {
       letters.push(l);
     }
   }
-  return escape(letters.join(''));
+  return letters.join('');
 }
 
 $.fn.random = function() {
@@ -29,6 +29,9 @@ function Wiggle(wiggleText) {
   this._DOM_HrefFontName = $('<a>').attr('target', '_blank');
 }
 
+var modal = $('#ampersand_modal');
+var linkName = modal.find('#fontFamily');
+
 Wiggle.prototype = {
 
   setWiggle: function (font) {
@@ -38,18 +41,15 @@ Wiggle.prototype = {
     if (variant) {
       this.wiggleText.css('font-style', variant);
     }
-    this.wiggleText.fadeIn(400);
-    this.wiggleText.trigger('resize');
+    this.wiggleText.bigtext();
 
     this.wiggleText.on('click', function() {
-      $('#ampersand_modal .wiggle').css('font-family', font.family);
+      modal.find('.wiggle').css('font-family', font.family);
 
       var link = $('<a>').attr('href', 'http://www.google.com/webfonts/specimen/'+font.family);
-      $('#ampersand_modal #fontFamily').html(link.attr('target', '_blank').text(font.family));
-
-      $('#ampersand_modal').modal();
-
-      $('#ampersand_modal .wiggle').trigger('resize');
+      linkName.html(link.attr('target', '_blank').text(font.family));
+      modal.modal();
+      modal.trigger('resize');
     });
   }
 
@@ -65,25 +65,18 @@ function refreshWiggles(wiggles) {
 
   wiggles.html('');
 
-  var fonts = _fontCache.randomize().slice(0, 100);
+  var fonts = _fontCache.randomize();
+  fonts.each(function(idx, font) {
+    WebFont.load({
+      google: { families: [font.family], text: "&" },
+      fontactive: function(fontFamily, fontDescription) {
+        var wiggle = $('<div>').addClass('pull-left short-wiggle');
+        wiggles.append(wiggle.append($('<div>').text('&')));
 
-  families = fonts.map(function(index, item) {
-    return item.family;
-  });
-
-  WebFont.load({
-    google: { families: families, text: "&" },
-    fontactive: function(fontFamily, fontDescription) {
-      var wiggle = $('<div>')
-        .addClass('pull-left short-wiggle')
-        .append($('<div>').text('&'));
-
-      wiggle.bigtext();
-      wiggles.append(wiggle);
-
-      var w = new Wiggle(wiggle);
-      w.setWiggle({family: fontFamily});
-    }
+        var w = new Wiggle(wiggle);
+        w.setWiggle({family: font.family});
+      }
+    });
   });
 }
 
@@ -92,6 +85,8 @@ $(function(){
   $('.ampersand-modal .wiggle').bigtext({
     maxfontsize: 400
   });
+
+  modal.find('.wiggle').bigtext();
 
   var wiggles = $('.wiggles');
   $.ajax({
