@@ -49,7 +49,6 @@ Wiggle.prototype = {
       var link = $('<a>').attr('href', 'http://www.google.com/webfonts/specimen/'+font.family);
       linkName.html(link.attr('target', '_blank').text(font.family));
       modal.modal();
-      modal.trigger('resize');
     });
   }
 
@@ -60,21 +59,32 @@ var GWF_APIKEY = 'AIzaSyBKEIQeLtpWJgZ8rqSPGoy5NgzqOoqlJIY';
 var GWF_APIURL = 'https://www.googleapis.com/webfonts/v1/webfonts';
 var _fontCache;
 
+Array.prototype.chunk = function ( n ) {
+    if ( !this.length ) {
+        return [];
+    }
+    return [ this.slice( 0, n ) ].concat( this.slice(n).chunk(n) );
+};
+
 
 function refreshWiggles(wiggles) {
 
   wiggles.html('');
 
   var fonts = _fontCache.randomize();
-  fonts.each(function(idx, font) {
+  var length = fonts.length;
+
+  var chunks = fonts.toArray().chunk(100);
+  $(chunks).each(function(index, chunk) {
+    var families = chunk.map(function(font){ return font.family; });
     WebFont.load({
-      google: { families: [font.family], text: "&" },
+      google: { families: families, text: "&" },
       fontactive: function(fontFamily, fontDescription) {
         var wiggle = $('<div>').addClass('pull-left short-wiggle');
         wiggles.append(wiggle.append($('<div>').text('&')));
 
         var w = new Wiggle(wiggle);
-        w.setWiggle({family: font.family});
+        w.setWiggle({family: fontFamily});
       }
     });
   });
