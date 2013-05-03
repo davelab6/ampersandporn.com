@@ -1,4 +1,66 @@
 <!DOCTYPE html>
+<!--
+
+# Adobe Fonts in Edge Fonts not in Google Fonts
+
+Alexa Std
+Brush Script Std
+Cooper Black Std
+Fusaka Std
+Giddyup Std
+Hobo Std
+Immi Five Of Fxve
+Sanvito Pro Display
+Shuriken Std
+Stencil Std
+Strumpf Std
+
+
+https://typekit.com/fonts/alexa-std
+https://typekit.com/fonts/brush-script-std
+https://typekit.com/fonts/cooper-black-std
+https://typekit.com/fonts/fusaka-std
+https://typekit.com/fonts/giddyup-std
+https://typekit.com/fonts/hobo-std
+https://typekit.com/fonts/immi-five-of-five
+https://typekit.com/fonts/sanvito-pro-display
+https://typekit.com/fonts/shuriken-std
+https://typekit.com/fonts/stencil-std
+https://typekit.com/fonts/strumpf-std-contour
+
+# OFL Fonts in Edge Fonts not in Google Fonts
+
+Bebas Neue
+Chunk
+Clara
+League Gothic
+M+ 1c
+M+ 1m
+Miama
+Neuton Cursive
+Strong
+Vera Sans
+
+# Python
+
+adobefonts = ['alexa-std','brush-script-std','cooper-black-std','fusaka-std','giddyup-std','hobo-std','immi-five-of-five','sanvito-pro-display','shuriken-std','stencil-std','strumpf-std-contour']
+
+librefonts = ['chunk','clara','league-gothic','m-1c','m-1m','miama','neuton-cursive','strong','vera-sans']
+
+fonts = [adobefonts, librefonts]
+
+for set in fonts:
+  for font in set:
+    print """
+<div class="span4" style="font-family: %s">
+    <h2>Heading</h2>
+    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+    <p><a class="btn" href="#">View details &raquo;</a></p>
+</div>
+""" % f
+
+-->
+
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -22,6 +84,21 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 
+
+<script src="http://use.edgefonts.net/alexa-std.js"></script>
+<script src="http://use.edgefonts.net/brush-script-std.js"></script>
+<script src="http://use.edgefonts.net/cooper-black-std.js"></script>
+<script src="http://use.edgefonts.net/fusaka-std.js"></script>
+<script src="http://use.edgefonts.net/giddyup-std.js"></script>
+<script src="http://use.edgefonts.net/hobo-std.js"></script>
+<script src="http://use.edgefonts.net/immi-five-of-five.js"></script>
+<script src="http://use.edgefonts.net/sanvito-pro-display.js"></script>
+<script src="http://use.edgefonts.net/shuriken-std.js"></script>
+<script src="http://use.edgefonts.net/stencil-std.js"></script>
+<script src="http://use.edgefonts.net/strumpf-std.js"></script>
+
+
+
 <script src="http://use.edgefonts.net/bebas-neue.js"></script>
 <script src="http://use.edgefonts.net/chunk.js"></script>
 <script src="http://use.edgefonts.net/clara.js"></script>
@@ -32,6 +109,8 @@
 <script src="http://use.edgefonts.net/neuton-cursive.js"></script>
 <script src="http://use.edgefonts.net/strong.js"></script>
 <script src="http://use.edgefonts.net/vera-sans.js"></script>
+
+
 
 <script>
 $(document).ready(function() {
@@ -54,47 +133,30 @@ $(document).ready(function() {
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="#">Project name</a>
-                    <div class="nav-collapse collapse">
-                        <ul class="nav">
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#about">About</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li class="divider"></li>
-                                    <li class="nav-header">Nav header</li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li><a href="#">One more separated link</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <form class="navbar-form pull-right">
-                            <input class="span2" type="text" placeholder="Email">
-                            <input class="span2" type="password" placeholder="Password">
-                            <button type="submit" class="btn">Sign in</button>
-                        </form>
-                    </div><!--/.nav-collapse -->
+                    <a class="brand" href="#">Font Lists</a>
                 </div>
             </div>
         </div>
 
         <div class="container">
 
-            <!-- Main hero unit for a primary marketing message or call to action -->
-            <div class="hero-unit">
-                <h1>Hello, world!</h1>
-                <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-                <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-            </div>
+
+			<div class="row">
+			    <div class="span10">
+				<h1>OFL Fonts in Edge Fonts not in Google Fonts</h1>  
+				</div>
+			</div>
+
 
             <!-- Example row of columns -->
             <div class="row">
-  
+
+<div class="span4" style="font-family: bebas-neue">
+    <h2>Heading</h2>
+    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+    <p><a class="btn">bebas-neue</a></p>
+</div>
+
 			    <div class="span4" style="font-family: chunk">
 			        <h2>Heading</h2>
 			        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
@@ -108,6 +170,8 @@ $(document).ready(function() {
 			        <p><a class="btn">clara</a></p>
 			    </div>
 
+</div>
+<div class="row">
 
 			    <div class="span4" style="font-family: league-gothic">
 			        <h2>Heading</h2>
@@ -115,8 +179,6 @@ $(document).ready(function() {
 			        <p><a class="btn">league-gothic</a></p>
 			    </div>
 
-</div>
-            <div class="row">
 			    <div class="span4" style="font-family: m-1c">
 			        <h2>Heading</h2>
 			        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
@@ -130,6 +192,8 @@ $(document).ready(function() {
 			        <p><a class="btn">m-1m</a></p>
 			    </div>
 
+			</div>
+			<div class="row">
 
 			    <div class="span4" style="font-family: miama">
 			        <h2>Heading</h2>
@@ -137,8 +201,6 @@ $(document).ready(function() {
 			        <p><a class="btn">miama</a></p>
 			    </div>
 
-</div>
-            <div class="row">
 			    <div class="span4" style="font-family: neuton-cursive">
 			        <h2>Heading</h2>
 			        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
@@ -152,6 +214,8 @@ $(document).ready(function() {
 			        <p><a class="btn">strong</a></p>
 			    </div>
 
+			</div>
+			<div class="row">
 
 			    <div class="span4" style="font-family: vera-sans">
 			        <h2>Heading</h2>
@@ -160,6 +224,105 @@ $(document).ready(function() {
 			    </div>
 
 </div>
+
+            <div class="row">
+			    <div class="span10">
+				<h1>Adobe Fonts in Edge Fonts not in Google Fonts</h1>  
+				</div>
+			</div>
+
+
+			<div class="row">
+
+			<div class="span4" style="font-family: alexa-std">
+			        <h2>Heading</h2>
+			        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+			        <p><a class="btn">alexa-std</a></p>
+			    </div>
+
+
+			    <div class="span4" style="font-family: brush-script-std">
+			        <h2>Heading</h2>
+			        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+			        <p><a class="btn">brush-script-std</a></p>
+			    </div>
+
+
+			    <div class="span4" style="font-family: cooper-black-std">
+			        <h2>Heading</h2>
+			        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+			        <p><a class="btn">cooper-black-std</a></p>
+			    </div>
+
+
+				</div>
+				<div class="row">
+
+			    <div class="span4" style="font-family: fusaka-std">
+			        <h2>Heading</h2>
+			        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+			        <p><a class="btn">fusaka-std</a></p>
+			    </div>
+
+
+			    <div class="span4" style="font-family: giddyup-std">
+			        <h2>Heading</h2>
+			        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+			        <p><a class="btn">giddyup-std</a></p>
+			    </div>
+
+
+			    <div class="span4" style="font-family: hobo-std">
+			        <h2>Heading</h2>
+			        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+			        <p><a class="btn">hobo-std</a></p>
+			    </div>
+
+
+				</div>
+				<div class="row">
+
+			    <div class="span4" style="font-family: immi-five-of-five">
+			        <h2>Heading</h2>
+			        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+			        <p><a class="btn">immi-five-of-five</a></p>
+			    </div>
+
+
+			    <div class="span4" style="font-family: sanvito-pro-display">
+			        <h2>Heading</h2>
+			        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+			        <p><a class="btn">sanvito-pro-display</a></p>
+			    </div>
+
+
+			    <div class="span4" style="font-family: shuriken-std">
+			        <h2>Heading</h2>
+			        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+			        <p><a class="btn">shuriken-std</a></p>
+			    </div>
+
+
+				</div>
+				<div class="row">
+
+			    <div class="span4" style="font-family: stencil-std">
+			        <h2>Heading</h2>
+			        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+			        <p><a class="btn">stencil-std</a></p>
+			    </div>
+
+
+			    <div class="span4" style="font-family: strumpf-std">
+			        <h2>Heading</h2>
+			        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+			        <p><a class="btn">strumpf-std</a></p>
+			    </div>
+
+
+</div>
+
+
 
             <hr>
 
